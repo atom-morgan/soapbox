@@ -35,4 +35,8 @@ angular.module('mainCtrl', [])
     $location.path('/login');
   };
 
+  vm.goToProfile = function() {
+    $location.path('/u/' + vm.user.username);
+  };
+
 });
