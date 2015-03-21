@@ -17,10 +17,6 @@ angular.module('app.routes', ['ngRoute'])
       controllerAs: 'register' 
     })
 
-    .when('/profile', {
-      templateUrl: 'app/views/pages/user/profile.html'
-    })
-
     .when('/u/:username', {
       templateUrl: 'app/views/pages/user/profile.html',
       controller: 'userProfileController',
