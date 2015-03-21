@@ -1,3 +1,9 @@
-<h1>Profile page</h1>
+<div class="col-md-4">
+  <h1>Profile page</h1>
 
-<p>Hello {{currentUser.userData.username}}</p>
+  <p>Hello {{currentUser.userData.username}}</p>
+</div>
+
+<div class="col-md-8" ng-controller="eventCreateController as event">
+  <a ng-click="event.open()" class="btn btn-default">New Event</a>
+</div>

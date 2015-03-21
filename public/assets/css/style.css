@@ -39,3 +39,11 @@ header .navbar {
   -moz-animation: zoomIn 0.3s both ease;
   animation: zoomIn 0.3s both ease;
 }
+
+/* Bootstrap Angular fix */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* Fixes */
+.no-pad {
+  padding: 0 !important;
+}

@@ -4,7 +4,9 @@ angular.module('userApp', [
   'authService',
   'mainCtrl',
   'userCtrl',
-  'userService'  
+  'eventCtrl',
+  'userService',
+  'ui.bootstrap'
 ])
 
 .config(function($httpProvider) {
