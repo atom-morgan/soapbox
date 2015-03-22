@@ -4,6 +4,17 @@
   <p>Hello {{currentUser.userData.username}}</p>
 </div>
 
-<div class="col-md-8" ng-controller="eventCreateController as event">
-  <a ng-click="event.open()" class="btn btn-default">New Event</a>
+<div class="col-md-4" ng-controller="boxController as userBoxes">
+  <div class="jumbotron text-center" ng-show="userBoxes.processing">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading Boxes...</p>
+  </div>
+
+  <div ng-show="userBoxes.boxes" ng-repeat="box in userBoxes.boxes">
+    <h4>{{box.title}}, {{box.description}}</h4>
+  </div>
+</div>
+
+<div class="col-md-4" ng-controller="boxCreateController as box">
+  <a ng-click="box.open()" class="btn btn-default">New Box</a>
 </div>

@@ -2,10 +2,11 @@ angular.module('userApp', [
   'ngAnimate',
   'app.routes',
   'authService',
+  'userService',
+  'boxService',
   'mainCtrl',
   'userCtrl',
-  'eventCtrl',
-  'userService',
+  'boxCtrl',
   'ui.bootstrap'
 ])
 
