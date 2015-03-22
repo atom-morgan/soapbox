@@ -1,5 +1,6 @@
 var bodyParser = require('body-parser'); 
     User = require('../models/user'),
+    Box = require('../models/box'),
     jwt = require('jsonwebtoken'),
     config = require('../../config');
 
@@ -101,10 +102,28 @@ module.exports = function(app, express) {
     }
   });
 
-  //test route
-  apiRouter.get('/', function(req, res) {
-    res.json({ message: 'Welcome to our API!' });
-  });
+  apiRouter.route('/box')
+    .post(function(req, res) {
+      var box = new Box();
+
+      box.creator = req.body.creator;
+      box.title = req.body.title;
+      box.description = req.body.description;
+
+      box.save(function(err) {
+        if (err) { res.send(err); }
+        res.json({ message: 'New Box created!' });
+      });
+    });
+
+  apiRouter.route('/users/:username/box')
+    .get(function(req, res) {
+      Box.find({ creator: req.params.username }, function(err, boxes) {
+        if (err) { res.send(err); }
+        res.json(boxes);
+      });
+    });
+
 
   apiRouter.route('/users')
     .get(function(req, res) {
@@ -157,6 +176,11 @@ module.exports = function(app, express) {
   //endpoint to get a user's information
   apiRouter.get('/me', function(req, res) {
     res.send(req.decoded);
+  });
+
+  //test route
+  apiRouter.get('/', function(req, res) {
+    res.json({ message: 'Welcome to our API!' });
   });
 
   return apiRouter;
