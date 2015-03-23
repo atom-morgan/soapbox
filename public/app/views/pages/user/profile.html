@@ -11,10 +11,10 @@
   </div>
 
   <div ng-show="userBoxes.boxes" ng-repeat="box in userBoxes.boxes">
-    <h4>{{box.title}}, {{box.description}}</h4>
+    <h4 style="border-bottom: 1px solid #888">{{box.title}}, {{box.description}}</h4>
   </div>
 </div>
 
-<div class="col-md-4" ng-controller="boxCreateController as box">
-  <a ng-click="box.open()" class="btn btn-default">New Box</a>
+<div class="col-md-4" ng-controller="boxModalController as boxModal">
+  <a ng-click="boxModal.open()" class="btn btn-default">New Box</a>
 </div>

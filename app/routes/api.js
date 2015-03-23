@@ -110,9 +110,9 @@ module.exports = function(app, express) {
       box.title = req.body.title;
       box.description = req.body.description;
 
-      box.save(function(err) {
+      box.save(function(err, box) {
         if (err) { res.send(err); }
-        res.json({ message: 'New Box created!' });
+        res.json({ box: box, message: 'New Box created!' });
       });
     });
 
