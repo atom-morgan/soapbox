@@ -35,6 +35,10 @@ header .navbar {
   margin-top: 20px;
 }
 
+.box-container a.btn-warning {
+  margin-right: 10px;
+}
+
 /* ANIMATIONS */
 .spinner {
   animation: spin 1s infinite;
