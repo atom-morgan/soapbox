@@ -39,6 +39,12 @@ angular.module('app.routes', ['ngRoute'])
       templateUrl: 'app/views/pages/users/single.html',
       controller: 'userEditController',
       controllerAs: 'user'
+    })
+
+    .when('/box/:box_id', {
+      templateUrl: 'app/views/pages/boxes/show.html',
+      controller: 'boxShowController',
+      controllerAs: 'showBox'
     });
 
   $locationProvider.html5Mode(true);

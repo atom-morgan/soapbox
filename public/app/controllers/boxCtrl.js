@@ -79,4 +79,13 @@ angular.module('boxCtrl', ['ui.bootstrap'])
     $modalInstance.dismiss('cancel');
   };
 
+})
+
+.controller('boxShowController', function(Box, $routeParams) {
+  var vm = this;
+
+  Box.getById($routeParams.box_id)
+    .success(function(data) {
+      vm.box = data;
+    });
 });

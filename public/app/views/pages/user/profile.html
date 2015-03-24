@@ -12,11 +12,12 @@
 
   <div class="box-container row" ng-show="userBoxes.boxes" ng-repeat="box in userBoxes.boxes track by $index">
     <div class="col-md-8">
-      <p class="box-title">{{box.title}}</p>
+      <p class="box-title"><a href="/box/{{box._id}}">{{box.title}}</a></p>
       <p class="box-description">{{box.description}}</p>
     </div>
     <div class="col-md-4">
       <a class="btn btn-danger btn-xs pull-right" ng-click="userBoxes.deleteBox($index)">Delete</a>
+      <a class="btn btn-warning btn-xs pull-right" ng-click="">Edit</a>
     </div>
   </div>
 </div>

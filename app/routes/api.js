@@ -124,6 +124,13 @@ module.exports = function(app, express) {
         if (err) { return res.send(err); }
         res.json({ message: 'Box deleted!' });
       });
+    })
+
+    .get(function(req, res) {
+      Box.findById(req.params.box_id, function(err, box) {
+        if (err) { return res.send(err); }
+        res.json(box);
+      });
     });
 
   apiRouter.route('/users/:username/box')

@@ -6,6 +6,10 @@ angular.module('boxService', [])
     return $http.get('/api/users/' + username + '/box/'); 
   };
 
+  boxFactory.getById = function(id) {
+    return $http.get('/api/box/' + id);
+  };
+
   boxFactory.create = function(boxData) {
     return $http.post('/api/box', boxData); 
   };
