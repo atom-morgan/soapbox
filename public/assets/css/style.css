@@ -12,6 +12,29 @@ header .navbar {
   margin-top: 12%;
 }
 
+/* PROFILE PAGE */
+.box-container {
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.box-title {
+  font-size: 21px;
+  margin-bottom: 0px;
+}
+
+.box-description {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.box-container:nth-child(n+2) {
+  margin-top: 10px;
+}
+
+.box-container a {
+  margin-top: 20px;
+}
+
 /* ANIMATIONS */
 .spinner {
   animation: spin 1s infinite;
@@ -43,7 +66,7 @@ header .navbar {
 /* Bootstrap Angular fix */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-/* Fixes */
+/* Styling fixes */
 .no-pad {
   padding: 0 !important;
 }
