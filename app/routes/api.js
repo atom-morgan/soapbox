@@ -116,6 +116,16 @@ module.exports = function(app, express) {
       });
     });
 
+  apiRouter.route('/box/:box_id')
+    .delete(function(req, res) {
+      Box.remove({
+        _id: req.params.box_id
+      }, function(err, box) {
+        if (err) { return res.send(err); }
+        res.json({ message: 'Box deleted!' });
+      });
+    });
+
   apiRouter.route('/users/:username/box')
     .get(function(req, res) {
       Box.find({ creator: req.params.username }, function(err, boxes) {

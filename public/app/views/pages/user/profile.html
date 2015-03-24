@@ -1,20 +1,26 @@
-<div class="col-md-4">
+<div class="col-md-3">
   <h1>Profile page</h1>
 
   <p>Hello {{currentUser.userData.username}}</p>
 </div>
 
-<div class="col-md-4" ng-controller="boxController as userBoxes">
+<div class="col-md-6" ng-controller="boxController as userBoxes">
   <div class="jumbotron text-center" ng-show="userBoxes.processing">
     <span class="glyphicon glyphicon-repeat spinner"></span>
     <p>Loading Boxes...</p>
   </div>
 
-  <div ng-show="userBoxes.boxes" ng-repeat="box in userBoxes.boxes">
-    <h4 style="border-bottom: 1px solid #888">{{box.title}}, {{box.description}}</h4>
+  <div class="box-container row" ng-show="userBoxes.boxes" ng-repeat="box in userBoxes.boxes track by $index">
+    <div class="col-md-8">
+      <p class="box-title">{{box.title}}</p>
+      <p class="box-description">{{box.description}}</p>
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-danger btn-xs pull-right" ng-click="userBoxes.deleteBox($index)">Delete</a>
+    </div>
   </div>
 </div>
 
-<div class="col-md-4" ng-controller="boxModalController as boxModal">
+<div class="col-md-3" ng-controller="boxModalController as boxModal">
   <a ng-click="boxModal.open()" class="btn btn-default">New Box</a>
 </div>

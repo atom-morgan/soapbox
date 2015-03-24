@@ -10,5 +10,9 @@ angular.module('boxService', [])
     return $http.post('/api/box', boxData); 
   };
 
+  boxFactory.delete = function(box) {
+    return $http.delete('/api/box/' + box);
+  };
+
   return boxFactory;
 });

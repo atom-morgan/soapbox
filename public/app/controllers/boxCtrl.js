@@ -37,6 +37,14 @@ angular.module('boxCtrl', ['ui.bootstrap'])
         });
     });
 
+  vm.deleteBox = function(box) {
+    Box.delete(vm.boxes[box]._id)
+      .success(function(data) {
+        //update this to remove the one box from local scope (vm.boxes)
+        updateBoxes();
+      });
+  };
+
   $scope.$on('new-box-created', function(event, msg) {
     console.log('msg is ' + JSON.stringify(msg, null, ' '));
     updateBoxes();
