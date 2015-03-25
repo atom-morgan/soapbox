@@ -1,25 +1,27 @@
 <div class="modal-header">
-  <h3 class="modal-title">Create a new box</h3>
+  <h3 ng-if="box.type == 'create'" class="modal-title">Create a new box</h3>
+  <h3 ng-if="box.type == 'edit'" class="modal-title">Edit your box</h3>
 </div>
 
-<form ng-submit="newBox.createBox()">
+<form ng-submit="box.createBox()">
   <div class="modal-body">
 
     <div class="form-group">
       <label>Title</label>
-      <input type="text" class="form-control" ng-model="newBox.boxData.title">
+      <input type="text" class="form-control" ng-model="box.boxData.title">
     </div>
 
     <div class="form-group">
       <label>Description</label>
-      <input type="text" class="form-control" ng-model="newBox.boxData.description">
+      <input type="text" class="form-control" ng-model="box.boxData.description">
     </div>
 
   </div>
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Create box</button>
-    <button type="button" class="btn btn-warning" ng-click="newBox.closeModal()">Cancel</button>
+    <button ng-if="box.type =='create'" type="submit" class="btn btn-primary">Create box</button>
+    <button ng-if="box.type =='edit'" type="submit" class="btn btn-primary">Save box</button>
+    <button type="button" class="btn btn-warning" ng-click="box.closeModal()">Cancel</button>
   </div>
 
 </form>

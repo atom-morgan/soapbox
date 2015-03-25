@@ -121,15 +121,29 @@ module.exports = function(app, express) {
       Box.remove({
         _id: req.params.box_id
       }, function(err, box) {
-        if (err) { return res.send(err); }
+        if (err) { res.send(err); }
         res.json({ message: 'Box deleted!' });
       });
     })
 
     .get(function(req, res) {
       Box.findById(req.params.box_id, function(err, box) {
-        if (err) { return res.send(err); }
+        if (err) { res.send(err); }
         res.json(box);
+      });
+    })
+
+    .put(function(req, res) {
+      Box.findById(req.params.box_id, function(err, box) {
+        if (err) { res.send(err); }
+
+        if (req.body.title) { box.title = req.body.title; }
+        if (req.body.description) { box.description = req.body.description; }
+
+        box.save(function(err) {
+          if (err) { res.send(err); }
+          res.json({ message: 'Box updated!' });
+        });
       });
     });
 
@@ -177,7 +191,7 @@ module.exports = function(app, express) {
       User.remove({
         _id: req.params.user_id
       }, function(err, user) {
-        if (err) { return res.send(err); }
+        if (err) { res.send(err); }
         res.json({ message: 'Successfully deleted!' });
       });
     });

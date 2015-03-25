@@ -11,10 +11,13 @@ angular.module('boxCtrl', ['ui.bootstrap'])
     var modalInstance = $modal.open({
       templateUrl: 'app/views/pages/boxes/new.html',
       controller: 'boxCreateController',
-      controllerAs: 'newBox',
+      controllerAs: 'box',
       resolve: {
         currentUser: function() {
           return vm.currentUser;
+        },
+        formType: function() {
+          return 'create';
         }
       }
     });
@@ -22,7 +25,7 @@ angular.module('boxCtrl', ['ui.bootstrap'])
 
 })
 
-.controller('boxController', function(Auth, Box, $scope) {
+.controller('boxController', function(Auth, Box, $scope, $modal) {
   var vm = this;
 
   vm.processing = true;
@@ -45,6 +48,23 @@ angular.module('boxCtrl', ['ui.bootstrap'])
       });
   };
 
+  vm.editBox = function(box) {
+    vm.type == 'edit';
+    var modalInstance = $modal.open({
+      templateUrl: 'app/views/pages/boxes/new.html',
+      controller: 'boxEditController',
+      controllerAs: 'box',
+      resolve: {
+        boxData: function() {
+          return vm.boxes[box];
+        },
+        formType: function() {
+          return 'edit';
+        }
+      }
+    });
+  };
+
   $scope.$on('new-box-created', function(event, msg) {
     console.log('msg is ' + JSON.stringify(msg, null, ' '));
     updateBoxes();
@@ -62,10 +82,11 @@ angular.module('boxCtrl', ['ui.bootstrap'])
 
 })
 
-.controller('boxCreateController', function(Box, $modalInstance, currentUser, $rootScope) {
+.controller('boxCreateController', function(Box, $modalInstance, currentUser, formType, $rootScope) {
   var vm = this;
   vm.boxData = {};
   vm.boxData.creator = currentUser.username;
+  vm.type = formType;
 
   vm.createBox = function() {
     Box.create(vm.boxData)
@@ -79,6 +100,24 @@ angular.module('boxCtrl', ['ui.bootstrap'])
     $modalInstance.dismiss('cancel');
   };
 
+})
+
+.controller('boxEditController', function(Box, $modalInstance, boxData, formType, $rootScope) {
+  var vm = this;
+  vm.boxData = boxData;
+  vm.type = formType;
+
+  vm.createBox = function() {
+    Box.update(vm.boxData._id, vm.boxData)
+      .success(function(data) {
+        $rootScope.$broadcast('new-box-created', vm.boxData);
+        $modalInstance.close();
+      });
+  };
+
+  vm.closeModal = function() {
+    $modalInstance.dismiss('cancel');
+  };
 })
 
 .controller('boxShowController', function(Box, $routeParams) {
