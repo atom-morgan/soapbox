@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 
 var BoxSchema = new Schema({
-  creator: { type: String },
+  creator: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: false },
   questions: { type: Array },
