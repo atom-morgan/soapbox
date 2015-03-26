@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser'); 
     User = require('../models/user'),
     Box = require('../models/box'),
+    Question = require('../models/question'),
     jwt = require('jsonwebtoken'),
     config = require('../../config');
 
@@ -143,6 +144,23 @@ module.exports = function(app, express) {
         box.save(function(err) {
           if (err) { res.send(err); }
           res.json({ message: 'Box updated!' });
+        });
+      });
+    });
+
+  apiRouter.route('/question')
+    .post(function(req, res) {
+      var question = new Question();
+
+      question.creator = req.body.creator;
+      question.content = req.body.content;
+
+      Box.findById(req.body.box_id, function(err, box) {
+        if (err) { res.send(err); }
+        box.questions.push(question);
+        box.save(function(err, updatedBox) {
+          if (err) { res.send(err); }
+          res.json({ question: question, message: 'New Question created!' });
         });
       });
     });

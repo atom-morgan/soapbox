@@ -4,9 +4,11 @@ angular.module('userApp', [
   'authService',
   'userService',
   'boxService',
+  'questionService',
   'mainCtrl',
   'userCtrl',
   'boxCtrl',
+  'questionCtrl',
   'ui.bootstrap'
 ])
 

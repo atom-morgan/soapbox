@@ -12,6 +12,14 @@ header .navbar {
   margin-top: 12%;
 }
 
+.question-form textarea {
+  resize: none;
+}
+
+.question-form button {
+  margin: 10px 0 20px 0;
+}
+
 /* PROFILE PAGE */
 .box-container {
   border-bottom: 1px solid #D3D3D3;

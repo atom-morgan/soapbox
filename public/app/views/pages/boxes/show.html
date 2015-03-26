@@ -1,1 +1,19 @@
-<h1 class="text-center">{{showBox.box.title}}</h1>
+<div class="col-md-8 col-md-offset-2">
+  <h1 class="text-center">{{showBox.box.title}}</h1>
+
+  <form ng-submit="question.createQuestion()" ng-controller="questionCreateController as question" class="question-form">
+    <textarea class="form-control" rows="3" ng-model="question.questionData.content"></textarea>
+
+    <button type="submit" class="btn btn-primary">
+      <span ng-if="!question.processing">Post question</span>
+      <span ng-if="question.processing" class="spinner"><span class="glyphicon glyphicon-repeat"></span></span>
+    </button>
+  </form>
+
+  <!--TODO UPDATE CLASSES BELOW-->
+  <div class="box-container" ng-show="showBox.box.questions.length" ng-repeat="question in showBox.box.questions">
+    <p class="box-title">{{question.content}}</p> by <small>{{question.creator}}</small>
+  </div>
+</div>
+
+

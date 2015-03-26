@@ -120,11 +120,15 @@ angular.module('boxCtrl', ['ui.bootstrap'])
   };
 })
 
-.controller('boxShowController', function(Box, $routeParams) {
+.controller('boxShowController', function(Box, $routeParams, $scope) {
   var vm = this;
 
   Box.getById($routeParams.box_id)
     .success(function(data) {
       vm.box = data;
     });
+
+  $scope.$on('new-question-created', function(event, newQuestion) {
+    vm.box.questions.push(newQuestion);
+  });
 });
