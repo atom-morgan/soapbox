@@ -155,13 +155,25 @@ module.exports = function(app, express) {
       question.creator = req.body.creator;
       question.content = req.body.content;
 
-      Box.findById(req.body.box_id, function(err, box) {
+      question.save(function(err, newQuestion) {
         if (err) { res.send(err); }
-        box.questions.push(question);
-        box.save(function(err, updatedBox) {
+        Box.findById(req.body.box_id, function(err, box) {
           if (err) { res.send(err); }
-          res.json({ question: question, message: 'New Question created!' });
+          box.questions.push(newQuestion);
+          box.save(function(err, updatedBox) {
+            if (err) { res.send(err); }
+            res.json({ question: newQuestion, message: 'New question created!' });
+          });
         });
+      });
+
+    });
+
+  apiRouter.route('/question/:question_id')
+    .get(function(req, res) {
+      Question.findById(req.params.question_id, function(err, question) {
+        if (err) { res.send(err); }
+        res.json({ question: question, message: 'Question found!' });
       });
     });
 
