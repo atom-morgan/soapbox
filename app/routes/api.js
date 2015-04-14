@@ -148,23 +148,25 @@ module.exports = function(app, express) {
       });
     });
 
+  apiRouter.route('/questions/:box_id')
+    .get(function(req, res) {
+      Question.find({ _box_id: req.params.box_id }, function(err, questions) {
+        if (err) { res.send(err); }
+        res.json(questions);
+      });
+    });
+
   apiRouter.route('/question')
     .post(function(req, res) {
       var question = new Question();
 
+      question._box_id = req.body.box_id;
       question.creator = req.body.creator;
       question.content = req.body.content;
 
       question.save(function(err, newQuestion) {
         if (err) { res.send(err); }
-        Box.findById(req.body.box_id, function(err, box) {
-          if (err) { res.send(err); }
-          box.questions.push(newQuestion);
-          box.save(function(err, updatedBox) {
-            if (err) { res.send(err); }
-            res.json({ question: newQuestion, message: 'New question created!' });
-          });
-        });
+        res.json({ question: newQuestion, message: 'New question created!' });
       });
 
     });

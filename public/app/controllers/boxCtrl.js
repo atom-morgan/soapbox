@@ -120,12 +120,20 @@ angular.module('boxCtrl', ['ui.bootstrap'])
   };
 })
 
-.controller('boxShowController', function(Box, $routeParams, $scope) {
+.controller('boxShowController', function(Box, Question, $routeParams, $scope) {
   var vm = this;
+  vm.box = {};
+  vm.box.questions = [];
 
+  /* TO DO - Fix these two calls */
   Box.getById($routeParams.box_id)
     .success(function(data) {
       vm.box = data;
+    });
+
+  Question.getForBox($routeParams.box_id)
+    .success(function(data) {
+      vm.box.questions = data;
     });
 
   $scope.$on('new-question-created', function(event, newQuestion) {

@@ -6,7 +6,6 @@ var BoxSchema = new Schema({
   creator: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: false },
-  questions: { type: Array },
   created: { type: Date, default: Date.now }
 });
 
