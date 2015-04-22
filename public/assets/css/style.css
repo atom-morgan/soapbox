@@ -47,6 +47,41 @@ header .navbar {
   margin-right: 10px;
 }
 
+.vote-box {
+  margin-top: 10px;
+  padding-left: 90px;
+  font-size: 22px;
+}
+
+.vote-box a {
+  color: #888;
+}
+
+.vote-box a.upvote {
+  color: blue;
+}
+
+.vote-box a.downvote {
+  color: red;
+}
+
+.vote-box a:hover {
+  text-decoration: none;
+}
+
+.vote-box .fa {
+  display: block;
+  margin-left: 5px;
+}
+
+.vote-box .fa-chevron-up {
+  margin-top: -5px;
+}
+
+.vote-box .fa-chevron-down {
+  margin-top: 5px;
+}
+
 /* ANIMATIONS */
 .spinner {
   animation: spin 1s infinite;

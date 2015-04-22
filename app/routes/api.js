@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser'); 
     User = require('../models/user'),
     Box = require('../models/box'),
+    Voter = require('../models/voter'),
     Question = require('../models/question'),
     jwt = require('jsonwebtoken'),
     config = require('../../config');
@@ -150,10 +151,12 @@ module.exports = function(app, express) {
 
   apiRouter.route('/questions/:box_id')
     .get(function(req, res) {
-      Question.find({ _box_id: req.params.box_id }, function(err, questions) {
-        if (err) { res.send(err); }
-        res.json(questions);
-      });
+      Question.find({ _box_id: req.params.box_id })
+        .populate('voters')
+        .exec(function(err, questions) {
+          if (err) { res.send(err); }
+          res.json(questions);
+        });
     });
 
   apiRouter.route('/question')
@@ -173,9 +176,30 @@ module.exports = function(app, express) {
 
   apiRouter.route('/question/:question_id')
     .get(function(req, res) {
-      Question.findById(req.params.question_id, function(err, question) {
+      Question.findOne({ _id: req.params.question_id })
+        .populate('voters')
+        .exec(function(err, question) {
+          if (err) { res.send(err); }
+          res.json({ question: question, message: 'Question found!' });
+        });
+    })
+
+    .put(function(req, res) {
+      var vote = new Voter();
+
+      vote.voter = req.body.voter;
+      vote.upvote = req.body.upvote;
+      vote.downvote = req.body.downvote;
+
+      vote.save(function(err, vote) {
         if (err) { res.send(err); }
-        res.json({ question: question, message: 'Question found!' });
+        Question.findById(req.params.question_id, function(err, question) {
+          question.voters.push(vote);
+          question.save(function(err, updatedQuestion) {
+            if (err) { res.send(err); }
+            res.json({ message: 'Vote added!' });
+          });
+        });
       });
     });
 

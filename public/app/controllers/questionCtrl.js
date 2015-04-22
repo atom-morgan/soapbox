@@ -18,4 +18,34 @@ angular.module('questionCtrl', [])
         vm.questionData.content = '';
       });
   };
+})
+
+.controller('questionVoteController', function(Auth, Question) {
+  var vm = this;
+  vm.voteData = {};
+
+  Auth.getUser()
+    .success(function(data) {
+      vm.currentUser = data;
+    });
+
+  vm.upvote = function(question) {
+    vm.voteData.voter = vm.currentUser.username;
+    vm.voteData.upvote = true;
+    vm.voteData.downvote = false;
+    Question.vote(question._id, vm.voteData)
+      .success(function(data) {
+        console.log(data.message);
+      });
+  };
+
+  vm.downvote = function(question) {
+    vm.voteData.voter = vm.currentUser.username;
+    vm.voteData.upvote = false;
+    vm.voteData.downvote = true;
+    Question.vote(question._id, vm.voteData)
+      .success(function(data) {
+        console.log(data.message);
+      });
+  };
 });

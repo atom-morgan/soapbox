@@ -10,5 +10,9 @@ angular.module('questionService', [])
     return $http.get('/api/questions/' + box_id);
   };
 
+  questionFactory.vote = function(question_id, voteData) {
+    return $http.put('/api/question/' + question_id, voteData);
+  };
+
   return questionFactory;
 });
