@@ -49,7 +49,7 @@ angular.module('boxCtrl', ['ui.bootstrap'])
   };
 
   vm.editBox = function(box) {
-    vm.type == 'edit';
+    vm.type = 'edit';
     var modalInstance = $modal.open({
       templateUrl: 'app/views/pages/boxes/new.html',
       controller: 'boxEditController',
