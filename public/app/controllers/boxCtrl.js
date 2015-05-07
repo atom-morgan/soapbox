@@ -169,4 +169,8 @@ angular.module('boxCtrl', ['ui.bootstrap'])
     vm.box.questions.push(newQuestion);
   });
 
+  $scope.$on('vote-updated', function(event, newVote) {
+    user_votes[newVote.id] = newVote.vote;
+  });
+
 });

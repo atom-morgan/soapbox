@@ -20,7 +20,7 @@ angular.module('questionCtrl', [])
   };
 })
 
-.controller('questionVoteController', function(Auth, Question) {
+.controller('questionVoteController', function(Auth, Question, $rootScope) {
   var vm = this;
   vm.voteData = {};
 
@@ -33,9 +33,12 @@ angular.module('questionCtrl', [])
     vm.voteData.voter = vm.currentUser.username;
     vm.voteData.upvote = true;
     vm.voteData.downvote = false;
+
     Question.vote(question._id, vm.voteData)
       .success(function(data) {
         console.log(data.message);
+        var new_vote = initUpdatedVote(question._id, "upvote");
+        $rootScope.$broadcast('vote-updated', new_vote);
       });
   };
 
@@ -43,9 +46,19 @@ angular.module('questionCtrl', [])
     vm.voteData.voter = vm.currentUser.username;
     vm.voteData.upvote = false;
     vm.voteData.downvote = true;
+
     Question.vote(question._id, vm.voteData)
       .success(function(data) {
         console.log(data.message);
+        var new_vote = initUpdatedVote(question._id, "downvote");
+        $rootScope.$broadcast('vote-updated', new_vote);
       });
   };
+
+  function initUpdatedVote(question_id, vote) {
+    var new_vote = {};
+    new_vote.id = question_id;
+    new_vote.vote = vote;
+    return new_vote;
+  }
 });
