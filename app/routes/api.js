@@ -194,6 +194,7 @@ module.exports = function(app, express) {
       vote.save(function(err, vote) {
         if (err) { res.send(err); }
         Question.findById(req.params.question_id, function(err, question) {
+          vote.upvote === true ? question.votes++ : question.votes--;
           question.voters.push(vote);
           question.save(function(err, updatedQuestion) {
             if (err) { res.send(err); }
