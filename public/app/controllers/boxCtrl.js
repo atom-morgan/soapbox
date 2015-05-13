@@ -171,6 +171,11 @@ angular.module('boxCtrl', ['ui.bootstrap'])
 
   $scope.$on('vote-updated', function(event, newVote) {
     user_votes[newVote.id] = newVote.vote;
+    vm.box.questions.filter(function(question) {
+      if (question._id === newVote.id) {
+        newVote.vote === "upvote" ? question.votes++ : question.votes--;
+      }
+    });
   });
 
 });
