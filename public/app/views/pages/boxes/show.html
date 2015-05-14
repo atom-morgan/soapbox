@@ -11,7 +11,7 @@
   </form>
 
   <!--TODO UPDATE CLASSES BELOW-->
-  <div class="box-container" ng-show="showBox.box.questions.length" ng-repeat="question in showBox.box.questions">
+  <div class="box-container" ng-show="showBox.box.questions.length" ng-repeat="question in showBox.box.questions | orderBy:'-votes'">
     <div class="row">
       <div class="col-md-2 vote-box" ng-controller="questionVoteController as vote">
         <span class="total-votes">{{question.votes}}</span>
@@ -24,5 +24,3 @@
     </div>
   </div>
 </div>
-
-
