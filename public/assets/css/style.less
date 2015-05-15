@@ -1,3 +1,7 @@
+/* COLORS */
+@blue: #2196f3;
+@red: #e51c23;
+
 main {
   padding-top: 30px;
 }
@@ -61,12 +65,13 @@ header .navbar {
   color: #888;
 }
 
-.vote-box a.upvote {
-  color: blue;
-}
-
-.vote-box a.downvote {
-  color: red;
+.vote-box {
+  a.upvote {
+    color: @blue;
+  }
+  a.downvote {
+    color: @red;
+  }
 }
 
 .vote-box a:hover {
