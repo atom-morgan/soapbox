@@ -25,7 +25,7 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/users', {
       templateUrl: 'app/views/pages/users/all.html',
-      controller: 'userController',
+      controller: 'usersController',
       controllerAs: 'user'
     })
 
