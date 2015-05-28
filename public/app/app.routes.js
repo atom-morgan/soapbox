@@ -7,8 +7,8 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/login', {
       templateUrl: 'app/views/pages/login.html',
-      controller: 'mainController',
-      controllerAs: 'login'
+      controller: 'authController',
+      controllerAs: 'auth'
     })
 
     .when('/register', {
@@ -25,7 +25,7 @@ angular.module('app.routes', ['ngRoute'])
 
     .when('/users', {
       templateUrl: 'app/views/pages/users/all.html',
-      controller: 'userController',
+      controller: 'usersController',
       controllerAs: 'user'
     })
 

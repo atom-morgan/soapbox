@@ -22,26 +22,35 @@
     <script src="assets/libs/ui-bootstrap-tpls-0.12.1.min.js"></script>
 
     <!-- controllers -->
-    <script src="app/controllers/mainCtrl.js"></script>
-    <script src="app/controllers/userCtrl.js"></script>
-    <script src="app/controllers/boxCtrl.js"></script>
-    <script src="app/controllers/questionCtrl.js"></script>
+    <script src="app/components/auth/authCtrl.js"></script>
+    <script src="app/components/user/usersCtrl.js"></script>
+    <script src="app/components/user/userProfileCtrl.js"></script>
+    <script src="app/components/user/userRegisterCtrl.js"></script>
+    <script src="app/components/user/userEditCtrl.js"></script>
+    <script src="app/components/user/userCreateCtrl.js"></script>
+    <script src="app/components/box/userBoxesCtrl.js"></script>
+    <script src="app/components/box/boxModalCtrl.js"></script>
+    <script src="app/components/box/boxCreateCtrl.js"></script>
+    <script src="app/components/box/boxEditCtrl.js"></script>
+    <script src="app/components/box/boxShowCtrl.js"></script>
+    <script src="app/components/question/questionCreateCtrl.js"></script>
+    <script src="app/components/question/questionVoteCtrl.js"></script>
 
     <!-- services -->
-    <script src="app/services/authService.js"></script>
-    <script src="app/services/userService.js"></script>
-    <script src="app/services/boxService.js"></script>
-    <script src="app/services/questionService.js"></script>
+    <script src="app/components/auth/authService.js"></script>
+    <script src="app/components/user/userService.js"></script>
+    <script src="app/components/question/questionService.js"></script>
+    <script src="app/components/box/boxService.js"></script>
 
     <!-- main Angular app files -->
     <script src="app/app.routes.js"></script>
     <script src="app/app.js"></script>
   </head>
 
-  <body ng-app="userApp" ng-controller="mainController as main">
+  <body ng-app="userApp" ng-controller="authController as auth">
 
     <header>
-      <div class="navbar navbar-inverse" ng-if="main.loggedIn">
+      <div class="navbar navbar-inverse" ng-if="auth.loggedIn">
         <div class="container">
           <div class="navbar-header">
             <a href="/" class="navbar-brand"><i class="fa fa-cubes"></i> Soapbox</a>
@@ -51,9 +60,9 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li ng-if="!main.loggedIn"><a href="/login">Login</a></li> 
-            <li ng-if="main.loggedIn" class="navbar-text"><a class="no-pad" ng-click="main.goToProfile()">{{main.user.username}}</a></li>
-            <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+            <li ng-if="!auth.loggedIn"><a href="/login">Login</a></li>
+            <li ng-if="auth.loggedIn" class="navbar-text"><a class="no-pad" ng-click="auth.goToProfile()">{{auth.user.username}}</a></li>
+            <li ng-if="auth.loggedIn"><a href="#" ng-click="auth.doLogout()">Logout</a></li>
           </ul>
         </div>
       </div>
