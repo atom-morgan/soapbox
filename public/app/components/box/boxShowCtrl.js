@@ -50,7 +50,7 @@
           });
         }
         return questions;
-      };
+      }
 
       $scope.$on('new-question-created', function(event, newQuestion) {
         vm.box.questions.push(newQuestion);

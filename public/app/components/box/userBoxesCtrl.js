@@ -60,7 +60,7 @@
             vm.processing = false;
             vm.boxes = data;
           });
-      };
+      }
     }
 
 })();

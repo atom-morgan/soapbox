@@ -16,37 +16,21 @@
           vm.currentUser = data;
         });
 
-      vm.upvote = function(question) {
-        var userHasVoted = hasUserVoted(question.voters, "upvote");
+      vm.addVote = function(question, vote) {
+        var userHasVoted = hasUserVoted(question.voters, vote);
         if (!userHasVoted) {
           vm.voteData.voter = vm.currentUser.username;
-          vm.voteData.upvote = true;
-          vm.voteData.downvote = false;
+          vote === "upvote" ? vm.voteData.upvote = true : vm.voteData.upvote = false;
+          vote === "downvote" ? vm.voteData.downvote = true : vm.voteData.downvote = false;
 
           Question.vote(question._id, vm.voteData)
             .success(function(data) {
               console.log(data.message);
-              var new_vote = initUpdatedVote(question._id, "upvote");
+              var new_vote = initUpdatedVote(question._id, vote);
               $rootScope.$broadcast('vote-updated', new_vote);
             });
         }
-      };
-
-      vm.downvote = function(question) {
-        var userHasVoted = hasUserVoted(question.voters, "downvote");
-        if (!userHasVoted) {
-          vm.voteData.voter = vm.currentUser.username;
-          vm.voteData.upvote = false;
-          vm.voteData.downvote = true;
-
-          Question.vote(question._id, vm.voteData)
-            .success(function(data) {
-              console.log(data.message);
-              var new_vote = initUpdatedVote(question._id, "downvote");
-              $rootScope.$broadcast('vote-updated', new_vote);
-            });
-        }
-      };
+      }
 
       function initUpdatedVote(question_id, vote) {
         var new_vote = {};
