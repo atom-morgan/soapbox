@@ -34,8 +34,10 @@ app.use(express.static(__dirname + '/public'));
 //REGISTER ROUTES
 var apiRoutes = require('./app/routes/api')(app, express);
 var userRoutes = require('./app/routes/user')(app, express);
+var boxRoutes = require('./app/routes/box')(app, express);
 app.use('/api', apiRoutes);
 app.use('/api', userRoutes);
+app.use('/api', boxRoutes);
 
 //CATCHALL ROUTE - SENDS USERS TO FRONTEND
 app.get('*', function(req, res) {
