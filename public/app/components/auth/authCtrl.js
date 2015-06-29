@@ -30,7 +30,7 @@
           .success(function(data) {
             vm.processing = false;
             if (data.success) {
-              $location.path('/users'); 
+              $location.path('/u/' + vm.loginData.username);
             } else {
               vm.error = data.message; 
             }
