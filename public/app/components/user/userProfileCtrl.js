@@ -5,9 +5,9 @@
     .module('userCtrl')
     .controller('userProfileController', userProfileController);
 
-    userProfileController.$inject = ['$routeParams', 'User'];
+    userProfileController.$inject = ['$routeParams', 'User', 'Auth'];
 
-    function userProfileController($routeParams, User) {
+    function userProfileController($routeParams, User, Auth) {
       var vm = this;
 
       User.getByUsername($routeParams.username)
@@ -30,6 +30,14 @@
         .success(function(data) {
           vm.userData.stats.upvotes = data;
         });
+
+      Auth.getUser()
+        .success(function(data){
+          if (data.username === $routeParams.username) {
+            vm.isCurrentUser = true;
+          }
+        });
+
     }
     
 })();

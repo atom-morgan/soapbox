@@ -38,6 +38,6 @@
   </div>
 </div>
 
-<!--<div class="col-md-3" ng-controller="boxModalController as boxModal">-->
-  <!--<a ng-click="boxModal.open()" class="btn btn-default">New Box</a>-->
-<!--</div>-->
+<div ng-show="currentUser.isCurrentUser" class="col-md-3" ng-controller="boxModalController as boxModal">
+  <a ng-click="boxModal.open()" class="btn btn-default">New Box</a>
+</div>
