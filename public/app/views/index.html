@@ -61,7 +61,14 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li ng-if="!auth.loggedIn"><a href="/login">Login</a></li>
-            <li ng-if="auth.loggedIn" class="navbar-text"><a class="no-pad" ng-click="auth.goToProfile()">{{auth.user.username}}</a></li>
+            <li dropdown ng-if="auth.loggedIn">
+              <a href="#" dropdown-toggle>{{auth.user.username}}<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a ng-click="auth.goToProfile()">View Profile</a></li>
+                <li class="divider" role="presentation"></li>
+                <li><a ng-click="">Edit Profile</a></li>
+              </ul>
+            </li>
             <li ng-if="auth.loggedIn"><a href="#" ng-click="auth.doLogout()">Logout</a></li>
           </ul>
         </div>
