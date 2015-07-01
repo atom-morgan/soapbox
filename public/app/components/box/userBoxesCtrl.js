@@ -5,21 +5,17 @@
     .module('boxCtrl', ['ui.bootstrap'])
     .controller('userBoxesController', userBoxesController);
 
-    userBoxesController.$inject = ['Auth', 'Box', '$scope', '$modal'];
+    userBoxesController.$inject = ['Auth', 'Box', '$scope', '$routeParams', '$modal'];
 
-    function userBoxesController(Auth, Box, $scope, $modal) {
+    function userBoxesController(Auth, Box, $scope, $routeParams, $modal) {
       var vm = this;
 
       vm.processing = true;
 
-      Auth.getUser()
+      Box.getByUsername($routeParams.username)
         .success(function(data) {
-          vm.user = data;
-          Box.getByUsername(vm.user.username)
-            .success(function(data) {
-              vm.processing = false;
-              vm.boxes = data; 
-            });
+          vm.processing = false;
+          vm.boxes = data;
         });
 
       vm.deleteBox = function(box) {
@@ -54,13 +50,20 @@
 
       function updateBoxes() {
         vm.processing = true;
-        //update this to get the one newly created box
-        Box.getByUsername(vm.user.username)
+
+        Auth.getUser()
           .success(function(data) {
-            vm.processing = false;
-            vm.boxes = data;
+            vm.user = data;
+            //update this to get the one newly created box
+            Box.getByUsername(vm.user.username)
+              .success(function(data) {
+                vm.processing = false;
+                vm.boxes = data;
+              });
           });
       }
+
+
     }
 
 })();
