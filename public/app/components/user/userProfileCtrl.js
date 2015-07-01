@@ -13,6 +13,22 @@
       User.getByUsername($routeParams.username)
         .success(function(data) {
           vm.userData = data; 
+          vm.userData.stats = {};
+        });
+
+      User.getBoxCount($routeParams.username)
+        .success(function(data) {
+          vm.userData.stats.boxes = data;
+        });
+
+      User.getQuestionCount($routeParams.username)
+        .success(function(data) {
+          vm.userData.stats.questions = data;
+        });
+
+      User.getUpvoteCount($routeParams.username)
+        .success(function(data) {
+          vm.userData.stats.upvotes = data;
         });
     }
     

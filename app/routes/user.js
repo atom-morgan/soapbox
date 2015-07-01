@@ -29,6 +29,30 @@ module.exports = function(app, express) {
       });
     });
 
+  userRouter.route('/users/:username/stats/boxes')
+    .get(function(req, res) {
+      Box.count({ creator: req.params.username }, function(err, boxCount) {
+        if (err) { res.send(err); }
+        res.json(boxCount);
+      });
+    });
+
+  userRouter.route('/users/:username/stats/questions')
+    .get(function(req, res) {
+      Question.count({ creator: req.params.username }, function(err, questionCount) {
+        if (err) { res.send(err); }
+        res.json(questionCount);
+      });
+    });
+
+  userRouter.route('/users/:username/stats/upvotes')
+    .get(function(req, res) {
+      Voter.count({ voter: req.params.username, upvote: true }, function(err, upvoteCount) {
+        if (err) { res.send(err); }
+        res.json(upvoteCount);
+      });
+    });
+
   /* ADMIN ROUTES TO EDIT AND DELETE USERS */
   userRouter.route('/users/:user_id')
     .get(function(req, res) {

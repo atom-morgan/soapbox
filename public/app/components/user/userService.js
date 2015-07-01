@@ -26,6 +26,18 @@ angular.module('userService', [])
     return $http.delete('/api/users/' + id); 
   };
 
+  userFactory.getBoxCount = function(username) {
+    return $http.get('/api/users/' + username + '/stats/boxes');
+  };
+
+  userFactory.getQuestionCount = function(username) {
+    return $http.get('/api/users/' + username + '/stats/questions');
+  };
+
+  userFactory.getUpvoteCount = function(username) {
+    return $http.get('/api/users/' + username + '/stats/upvotes');
+  };
+
   return userFactory;
   
 });
