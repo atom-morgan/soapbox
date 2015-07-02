@@ -21,12 +21,20 @@
 </div>
 
 <div class="col-md-6 col-md-offset-1" ng-controller="userBoxesController as userBoxes">
+  <ul class="nav nav-tabs">
+    <li ng-class="userBoxes.getSelectedTabClass('boxes')" ng-click="userBoxes.changeSelectedTab()"><a data-toggle="tab">Boxes</a></li>
+    <li ng-class="userBoxes.getSelectedTabClass('questions')" ng-click="userBoxes.changeSelectedTab()"><a data-toggle="tab">Questions</a></li>
+    <div ng-show="currentUser.isCurrentUser" ng-controller="boxModalController as boxModal">
+      <a ng-click="boxModal.open()" class="navbar-nav navbar-right btn btn-default">New Box</a>
+    </div>
+  </ul>
+
   <div class="jumbotron text-center" ng-show="userBoxes.processing">
     <span class="glyphicon glyphicon-repeat spinner"></span>
     <p>Loading Boxes...</p>
   </div>
 
-  <div class="box-container row" ng-show="userBoxes.boxes" ng-repeat="box in userBoxes.boxes track by $index">
+  <div class="box-container row" ng-show="userBoxes.boxes && userBoxes.selectedTab === 'boxes'" ng-repeat="box in userBoxes.boxes track by $index">
     <div class="col-md-8">
       <p class="box-title"><a href="/box/{{box._id}}">{{box.title}}</a></p>
       <p class="box-description">{{box.description}}</p>
@@ -36,8 +44,21 @@
       <a class="btn btn-warning btn-xs pull-right" ng-click="userBoxes.editBox($index)">Edit</a>
     </div>
   </div>
+
+
+  <div class="box-container row" ng-show="userBoxes.questions && userBoxes.selectedTab === 'questions'" ng-repeat="question in userBoxes.questions track by $index">
+    <div class="col-md-8">
+      <p class="box-title"><a href="/box/{{question._box_id}}">{{question.content}}</a> on box <a href="/box/{{question._box_id}}">{{question._box_title}}</a></p>
+      <!--<p class="box-description">{{box.description}}</p>-->
+    </div>
+    <div class="col-md-4">
+      <a class="btn btn-danger btn-xs pull-right" ng-click="userBoxes.deleteBox($index)">Delete</a>
+      <a class="btn btn-warning btn-xs pull-right" ng-click="userBoxes.editBox($index)">Edit</a>
+    </div>
+  </div>
+
 </div>
 
-<div ng-show="currentUser.isCurrentUser" class="col-md-3" ng-controller="boxModalController as boxModal">
-  <a ng-click="boxModal.open()" class="btn btn-default">New Box</a>
-</div>
+<!--<div ng-show="currentUser.isCurrentUser" class="col-md-3" ng-controller="boxModalController as boxModal">-->
+  <!--<a ng-click="boxModal.open()" class="btn btn-default">New Box</a>-->
+<!--</div>-->

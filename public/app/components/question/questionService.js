@@ -10,6 +10,10 @@ angular.module('questionService', [])
     return $http.get('/api/questions/' + box_id);
   };
 
+  questionFactory.getByUsername = function(username) {
+    return $http.get('/api/questions/u/' + username);
+  };
+
   questionFactory.vote = function(question_id, voteData) {
     return $http.put('/api/question/' + question_id, voteData);
   };
