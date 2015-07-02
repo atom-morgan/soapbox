@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var QuestionSchema = new Schema({
   _box_id: { type: String, required: true, index: true },
+  _box_title: { type: String, required: true },
   creator: { type: String, required: true },
   content: { type: String, required: true },
   created: { type: Date, default: Date.now },

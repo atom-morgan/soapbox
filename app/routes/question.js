@@ -8,6 +8,7 @@ module.exports = function(app, express) {
       var question = new Question();
 
       question._box_id = req.body.box_id;
+      question._box_title = req.body.box_title;
       question.creator = req.body.creator;
       question.content = req.body.content;
 
@@ -16,6 +17,14 @@ module.exports = function(app, express) {
         res.json({ question: newQuestion, message: 'New question created!' });
       });
 
+    });
+
+  questionRouter.route('/questions/u/:username')
+    .get(function(req, res) {
+      Question.find({ creator: req.params.username }, function(err, questions) {
+        if (err) { res.send(err); }
+        res.json(questions);
+      });
     });
 
   /* Get all questions for a box instance */
