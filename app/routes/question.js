@@ -14,7 +14,13 @@ module.exports = function(app, express) {
 
       question.save(function(err, newQuestion) {
         if (err) { res.send(err); }
-        res.json({ question: newQuestion, message: 'New question created!' });
+        Box.findOne({ _id: req.body.box_id }, function(err, box) {
+          box.question_count += 1;
+          box.save(function(err, newBox) {
+            if (err) { res.send(err); }
+            res.json({ question: newQuestion, message: 'New question created!' });
+          });
+        });
       });
 
     });
