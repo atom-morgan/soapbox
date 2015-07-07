@@ -49,6 +49,7 @@ header .navbar {
 }
 
 .box-container {
+  margin-bottom: 0;
   border-bottom: 1px solid #D3D3D3;
   .total-votes {
     position: absolute;
@@ -59,6 +60,7 @@ header .navbar {
 .box-title {
   font-size: 21px;
   margin-bottom: 0px;
+  margin-top: 5px;
 }
 
 .box-description {
@@ -66,16 +68,30 @@ header .navbar {
   margin-bottom: 10px;
 }
 
-.box-container:nth-child(n+2) {
-  margin-top: 10px;
+.question-count {
+  position: absolute;
+  width: 100px;
+
+  top: 13px;
+  right: 5%;
+
+  font-size: 18px;
+  text-align: center;
+  .question-counter {
+    font-size: 24px;
+  }
+  .glyphicon {
+    margin-left: 5px;
+  }
 }
 
-.box-container a {
-  margin-top: 20px;
+.first-box-container {
+  margin-top: 30px;
 }
 
-.box-container a.btn-warning {
-  margin-right: 10px;
+.edit-links {
+  display: inline-block;
+  margin: 0 5px 5px 0;
 }
 
 .vote-box {
