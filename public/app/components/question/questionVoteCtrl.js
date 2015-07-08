@@ -5,9 +5,9 @@
     .module('questionCtrl')
     .controller('questionVoteController', questionVoteController);
 
-    questionVoteController.$inject = ['Auth', 'Question', '$rootScope'];
+    questionVoteController.$inject = ['Auth', 'Vote', '$rootScope'];
 
-    function questionVoteController(Auth, Question, $rootScope) {
+    function questionVoteController(Auth, Vote, $rootScope) {
       var vm = this;
       vm.voteData = {};
 
@@ -23,7 +23,7 @@
           vote === "upvote" ? vm.voteData.upvote = true : vm.voteData.upvote = false;
           vote === "downvote" ? vm.voteData.downvote = true : vm.voteData.downvote = false;
 
-          Question.vote(question._id, vm.voteData)
+          Vote.vote(question._id, vm.voteData)
             .success(function(data) {
               console.log(data.message);
               var new_vote = initUpdatedVote(question._id, vote);

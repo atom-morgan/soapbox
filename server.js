@@ -36,10 +36,12 @@ var apiRoutes = require('./app/routes/api')(app, express);
 var userRoutes = require('./app/routes/user')(app, express);
 var boxRoutes = require('./app/routes/box')(app, express);
 var questionRoutes = require('./app/routes/question')(app, express);
+var voteRoutes = require('./app/routes/vote')(app, express);
 app.use('/api', apiRoutes);
 app.use('/api', userRoutes);
 app.use('/api', boxRoutes);
 app.use('/api', questionRoutes);
+app.use('/api', voteRoutes);
 
 //CATCHALL ROUTE - SENDS USERS TO FRONTEND
 app.get('*', function(req, res) {

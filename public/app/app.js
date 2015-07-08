@@ -5,6 +5,7 @@ angular.module('userApp', [
   'userService',
   'boxService',
   'questionService',
+  'voteService',
   'authCtrl',
   'userCtrl',
   'boxCtrl',
