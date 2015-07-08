@@ -55,6 +55,13 @@ module.exports = function(app, express) {
         });
     })
 
+    .delete(function(req, res) {
+      Question.remove({ _id: req.params.question_id }, function(err, question) {
+        if (err) { res.send(err); }
+        res.json({ message: 'Question deleted!' });
+      });
+    })
+
     /* Add a vote to a question */
     .put(function(req, res) {
       var vote = new Voter();

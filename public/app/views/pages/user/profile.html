@@ -57,7 +57,8 @@
       <p class="box-title">{{question.content}}</p>
       <p class="box-description">Posted on box <a href="/box/{{question._box_id}}">{{question._box_title}}</a>.</p>
       <a ng-show="currentUser.isCurrentUser" ng-click="userBoxes.editBox($index)" class="edit-links">Edit</a>
-      <a ng-show="currentUser.isCurrentUser" ng-click="userBoxes.deleteBox($index)" class="edit-links">Delete</a>
+      <a ng-show="currentUser.isCurrentUser" ng-click="userBoxes.deleteQuestion($index)" class="edit-links">Delete</a>
+      <!--<a ng-show="currentUser.isCurrentUser" ng-click="userBoxes.deleteBox($index)" class="edit-links">Delete</a>-->
     </div>
     <div class="col-md-4">
       <!--<a class="btn btn-danger btn-xs pull-right" ng-click="userBoxes.deleteBox($index)">Delete</a>-->

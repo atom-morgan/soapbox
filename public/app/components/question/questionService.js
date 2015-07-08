@@ -18,5 +18,9 @@ angular.module('questionService', [])
     return $http.put('/api/question/' + question_id, voteData);
   };
 
+  questionFactory.delete = function(question_id) {
+    return $http.delete('/api/question/' + question_id);
+  };
+
   return questionFactory;
 });

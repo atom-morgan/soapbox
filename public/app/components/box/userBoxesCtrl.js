@@ -10,8 +10,19 @@
     function userBoxesController(Auth, Box, $scope, $routeParams, $modal, Question) {
       var vm = this;
       vm.selectedTab = 'boxes';
-
       vm.processing = true;
+
+      Box.getByUsername($routeParams.username)
+        .success(function(data) {
+          vm.processing = false;
+          vm.boxes = data;
+        });
+
+      Question.getByUsername($routeParams.username)
+        .success(function(data) {
+          vm.processing = false;
+          vm.questions = data;
+        });
 
       vm.getSelectedTabClass = function(tab) {
         return vm.selectedTab === tab ? 'active' : '';
@@ -26,17 +37,12 @@
         console.log('CHANGED TO ' + vm.selectedTab);
       };
 
-      Box.getByUsername($routeParams.username)
-        .success(function(data) {
-          vm.processing = false;
-          vm.boxes = data;
-        });
-
-      Question.getByUsername($routeParams.username)
-        .success(function(data) {
-          vm.processing = false;
-          vm.questions = data;
-        });
+      vm.deleteQuestion = function(question) {
+        Question.delete(vm.questions[question]._id)
+          .success(function(data) {
+            updateQuestions();
+          });
+      };
 
       vm.deleteBox = function(box) {
         Box.delete(vm.boxes[box]._id)
@@ -63,25 +69,30 @@
         });
       };
 
+      function updateBoxes() {
+        vm.processing = true;
+
+        Box.getByUsername($routeParams.username)
+          .success(function(data) {
+            vm.processing = false;
+            vm.boxes = data;
+          });
+      }
+
+      function updateQuestions() {
+        vm.processing = true;
+
+        Question.getByUsername($routeParams.username)
+          .success(function(data) {
+            vm.processing = false;
+            vm.questions = data;
+          });
+      }
+
       $scope.$on('new-box-created', function(event, msg) {
         console.log('msg is ' + JSON.stringify(msg, null, ' '));
         updateBoxes();
       });
-
-      function updateBoxes() {
-        vm.processing = true;
-
-        Auth.getUser()
-          .success(function(data) {
-            vm.user = data;
-            //update this to get the one newly created box
-            Box.getByUsername(vm.user.username)
-              .success(function(data) {
-                vm.processing = false;
-                vm.boxes = data;
-              });
-          });
-      }
 
     }
 
