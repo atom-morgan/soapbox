@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3 ng-if="question.type == 'create'" class="modal-title">Create a new question</h3>
+  <h3 ng-if="question.type == 'edit'" class="modal-title">Edit your question</h3>
+</div>
+
+<form ng-submit="question.createQuestion()">
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label>Your Question</label>
+      <input type="text" class="form-control" ng-model="question.questionData.content">
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button ng-if="question.type =='create'" type="submit" class="btn btn-primary">Create question</button>
+    <button ng-if="question.type =='edit'" type="submit" class="btn btn-primary">Save question</button>
+    <button type="button" class="btn btn-warning" ng-click="question.closeModal()">Cancel</button>
+  </div>
+
+</form>

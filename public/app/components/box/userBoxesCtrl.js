@@ -69,6 +69,23 @@
         });
       };
 
+      vm.editQuestion = function(question) {
+        vm.type = 'edit';
+        var modalInstance = $modal.open({
+          templateUrl: 'app/views/pages/questions/new.html',
+          controller: 'questionEditController',
+          controllerAs: 'question',
+          resolve: {
+            questionData: function() {
+              return vm.questions[question];
+            },
+            formType: function() {
+              return 'edit';
+            }
+          }
+        });
+      };
+
       function updateBoxes() {
         vm.processing = true;
 

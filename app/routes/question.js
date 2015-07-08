@@ -60,6 +60,19 @@ module.exports = function(app, express) {
         if (err) { res.send(err); }
         res.json({ message: 'Question deleted!' });
       });
+    })
+
+    .put(function(req, res) {
+      var content = req.body.content;
+
+      Question.findById(req.params.question_id, function(err, question) {
+        if (err) { res.send(err); }
+        question.content = content;
+        question.save(function(err, updatedQuestion) {
+          if (err) { res.send(err); }
+          res.json({ message: 'Question updated!' });
+        });
+      });
     });
 
   return questionRouter;
