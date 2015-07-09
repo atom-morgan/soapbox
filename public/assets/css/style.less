@@ -2,8 +2,14 @@
 @blue: #2196f3;
 @red: #e51c23;
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 main {
   padding-top: 30px;
+  padding-bottom: 50px;
 }
 
 /* HEADER */
@@ -53,14 +59,23 @@ header .navbar {
   border-bottom: 1px solid #D3D3D3;
   .total-votes {
     position: absolute;
-    right: 50px;
+    left: 40px;
   }
 }
 
 .box-title {
+  margin: 10px 0 0 0;
   font-size: 21px;
-  margin-bottom: 0px;
-  margin-top: 5px;
+}
+
+.question-title {
+  margin: 10px 0 0 0;
+  font-size: 16px;
+}
+
+.question-creator {
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
 .box-description {
@@ -95,8 +110,8 @@ header .navbar {
 }
 
 .vote-box {
-  margin-top: 10px;
-  padding-left: 90px;
+  margin-top: 20px;
+  padding-left: 60px;
   font-size: 22px;
 }
 

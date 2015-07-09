@@ -51,9 +51,9 @@
 
 
   <div class="row box-container panel panel-default" ng-show="userBoxes.questions && userBoxes.selectedTab === 'questions'" ng-repeat="question in userBoxes.questions track by $index" ng-class="{'first-box-container': $first}">
-    <div class="col-md-8">
-      <p class="box-title">{{question.content}}</p>
-      <p class="box-description">Posted on box <a href="/box/{{question._box_id}}">{{question._box_title}}</a>.</p>
+    <div class="col-md-12">
+      <p class="question-title">{{question.content}}</p>
+      <p class="box-description">Posted in <a href="/box/{{question._box_id}}">{{question._box_title}}</a></p>
       <a ng-show="currentUser.isCurrentUser" ng-click="userBoxes.editQuestion($index)" class="edit-links">Edit</a>
       <a ng-show="currentUser.isCurrentUser" ng-click="userBoxes.deleteQuestion($index)" class="edit-links">Delete</a>
     </div>

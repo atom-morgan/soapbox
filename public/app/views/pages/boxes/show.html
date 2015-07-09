@@ -11,7 +11,7 @@
   </form>
 
   <!--TODO UPDATE CLASSES BELOW-->
-  <div class="box-container" ng-show="showBox.box.questions.length" ng-repeat="question in showBox.box.questions | orderBy:'-votes'">
+  <div class="box-container panel panel-default" ng-show="showBox.box.questions.length" ng-repeat="question in showBox.box.questions | orderBy:'-votes'">
     <div class="row">
       <div class="col-md-2 vote-box" ng-controller="questionVoteController as vote">
         <span class="total-votes">{{question.votes}}</span>
@@ -19,7 +19,7 @@
         <a href="#" ng-click="vote.addVote(question, 'downvote')" ng-class="{ downvote: showBox.isDownvoted(question._id) }"><i class="fa fa-chevron-down"></i></a>
       </div>
       <div class="col-md-8">
-        <p class="box-title">{{question.content}}</p> by <small>{{question.creator}}</small>
+        <p class="question-title">{{question.content}}</p> by <a href="/u/{{question.creator}}" class="question-creator">{{question.creator}}</a>
       </div>
     </div>
   </div>
