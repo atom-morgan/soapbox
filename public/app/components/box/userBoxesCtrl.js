@@ -38,7 +38,7 @@
       };
 
       vm.deleteQuestion = function(question) {
-        Question.delete(vm.questions[question]._id)
+        Question.delete(vm.questions[question]._id, vm.questions[question])
           .success(function(data) {
             updateQuestions();
           });

@@ -18,8 +18,15 @@ angular.module('questionService', [])
     return $http.put('/api/question/' + question_id, questionData);
   };
 
-  questionFactory.delete = function(question_id) {
-    return $http.delete('/api/question/' + question_id);
+  questionFactory.delete = function(question_id, question) {
+    //Config to pass a body with a DELETE request
+    var config = {
+      method: "DELETE",
+      url: '/api/question/' + question_id,
+      data: question,
+      headers: {"Content-Type": "application/json;charset=utf-8"}
+    };
+    return $http(config);
   };
 
   return questionFactory;

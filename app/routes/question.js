@@ -58,7 +58,15 @@ module.exports = function(app, express) {
     .delete(function(req, res) {
       Question.remove({ _id: req.params.question_id }, function(err, question) {
         if (err) { res.send(err); }
-        res.json({ message: 'Question deleted!' });
+        Box.findById(req.body._box_id, function(err, box) {
+          if (err) { res.send(err); }
+
+          box.question_count--;
+          box.save(function(err, updatedBox) {
+            if (err) { res.send(err); }
+            res.json({ message: 'Question deleted!' });
+          });
+        });
       });
     })
 
