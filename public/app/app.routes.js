@@ -66,7 +66,24 @@ angular.module('app.routes', ['ngRoute'])
     .when('/box/:box_id', {
       templateUrl: 'app/views/pages/boxes/show.html',
       controller: 'boxShowController',
-      controllerAs: 'showBox'
+      controllerAs: 'showBox',
+      resolve: {
+        currentUser: function(Auth) {
+          return Auth.getUser().then(function(user) {
+            return user.data;
+          });
+        },
+        boxData: function(Box, $route) {
+          return Box.getById($route.current.params.box_id).then(function(box) {
+            return box.data;
+          });
+        },
+        questionData: function(Question, $route) {
+          return Question.getForBox($route.current.params.box_id).then(function(question) {
+            return question.data;
+          });
+        },
+      }
     });
 
   $locationProvider.html5Mode(true);

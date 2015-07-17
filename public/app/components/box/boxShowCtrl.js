@@ -5,38 +5,22 @@
     .module('boxCtrl')
     .controller('boxShowController', boxShowController);
 
-    boxShowController.$inject = ['Box', 'Question', 'Auth', '$routeParams', '$scope'];
+    boxShowController.$inject = ['Box', 'Question', 'Auth', '$routeParams', '$scope', 'currentUser', 'boxData', 'questionData'];
 
-    function boxShowController(Box, Question, Auth, $routeParams, $scope) {
+    function boxShowController(Box, Question, Auth, $routeParams, $scope, currentUser, boxData, questionData) {
       var vm = this;
       var user_votes;
       vm.box = {};
       vm.box.questions = [];
 
-      /* TO DO - Fix these three calls */
-      Auth.getUser()
-        .success(function(data) {
-          vm.currentUser = data;
-        });
+      initialize();
 
-      Box.getById($routeParams.box_id)
-        .success(function(data) {
-          vm.box = data;
-        });
-
-      Question.getForBox($routeParams.box_id)
-        .success(function(data) {
-          vm.box.questions = data;
-          user_votes = getUserVotes(vm.box.questions);
-        });
-
-      vm.isUpvoted = function(id) {
-        if (user_votes[id] === "upvote") { return true; }
-      };
-
-      vm.isDownvoted = function(id) {
-        if (user_votes[id] === "downvote") { return true; }
-      };
+      function initialize() {
+        vm.currentUser = currentUser;
+        vm.box = boxData;
+        vm.box.questions = questionData;
+        user_votes = getUserVotes(vm.box.questions);
+      }
 
       function getUserVotes(voteData) {
         var questions = {};
@@ -52,6 +36,14 @@
         return questions;
       }
 
+      vm.isUpvoted = function(id) {
+        if (user_votes[id] === "upvote") { return true; }
+      };
+
+      vm.isDownvoted = function(id) {
+        if (user_votes[id] === "downvote") { return true; }
+      };
+
       $scope.$on('new-question-created', function(event, newQuestion) {
         vm.box.questions.push(newQuestion);
       });
@@ -64,6 +56,7 @@
           }
         });
       });
+
     }
 
 })();
