@@ -13,23 +13,21 @@
       vm.processing = true;
 
       User.all()
-        .success(function(data) {
+        .then(function(users) {
           vm.processing = false;
-
-          vm.users = data;
+          vm.users = users.data;
         });
 
       vm.deleteUser = function(id) {
         vm.processing = true;
 
         User.delete(id)
-          .success(function(data) {
-
+          .then(function() {
             //get an updated list of users
             User.all()
-              .success(function(data) {
+              .then(function(users) {
                 vm.processing = false;
-                vm.users = data;
+                vm.users = users.data;
               });
           });
       };
