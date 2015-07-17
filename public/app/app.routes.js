@@ -20,7 +20,29 @@ angular.module('app.routes', ['ngRoute'])
     .when('/u/:username', {
       templateUrl: 'app/views/pages/user/profile.html',
       controller: 'userProfileController',
-      controllerAs: 'currentUser' 
+      controllerAs: 'currentUser',
+      resolve: {
+        userData: function(User, $route) {
+          return User.getByUsername($route.current.params.username).then(function(user) {
+            return user.data;
+          });
+        },
+        boxCount: function(User, $route) {
+          return User.getBoxCount($route.current.params.username).then(function(boxes) {
+            return boxes.data;
+          });
+        },
+        questionCount: function(User, $route) {
+          return User.getQuestionCount($route.current.params.username).then(function(questions) {
+            return questions.data;
+          });
+        },
+        voteCount: function(User, $route) {
+          return User.getUpvoteCount($route.current.params.username).then(function(votes) {
+            return votes.data;
+          });
+        }
+      }
     })
 
     .when('/users', {

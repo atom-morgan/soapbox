@@ -5,31 +5,12 @@
     .module('userCtrl')
     .controller('userProfileController', userProfileController);
 
-    userProfileController.$inject = ['$routeParams', 'User', 'Auth'];
+    userProfileController.$inject = ['$routeParams', 'User', 'Auth', 'userData', 'boxCount', 'questionCount', 'voteCount'];
 
-    function userProfileController($routeParams, User, Auth) {
+    function userProfileController($routeParams, User, Auth, userData, boxCount, questionCount, voteCount) {
       var vm = this;
 
-      User.getByUsername($routeParams.username)
-        .success(function(data) {
-          vm.userData = data; 
-          vm.userData.stats = {};
-        });
-
-      User.getBoxCount($routeParams.username)
-        .success(function(data) {
-          vm.userData.stats.boxes = data;
-        });
-
-      User.getQuestionCount($routeParams.username)
-        .success(function(data) {
-          vm.userData.stats.questions = data;
-        });
-
-      User.getUpvoteCount($routeParams.username)
-        .success(function(data) {
-          vm.userData.stats.upvotes = data;
-        });
+      initialize();
 
       Auth.getUser()
         .success(function(data){
@@ -37,6 +18,14 @@
             vm.isCurrentUser = true;
           }
         });
+
+      function initialize() {
+        vm.userData = userData;
+        vm.userData.stats = {};
+        vm.userData.stats.boxes = boxCount;
+        vm.userData.stats.questions = questionCount;
+        vm.userData.stats.upvotes = voteCount;
+      }
 
     }
     
